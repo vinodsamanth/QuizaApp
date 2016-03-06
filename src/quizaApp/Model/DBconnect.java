@@ -98,6 +98,7 @@ public class DBconnect {
 	}
 
 	public void creatQuiz(Quiz quiz) {
+		int quiz_id = -1;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = DriverManager.getConnection(url, user, password);
@@ -109,6 +110,12 @@ public class DBconnect {
 			statement.setString(4, quiz.getTimeFrame());
 			statement.setString(5, quiz.getqDescription());
 			statement.execute();
+			this.statement = connection.prepareStatement("Select quiz_id from `quizaapp`.`quiz` where `quiz_name` = ? ");
+			statement.setString(1, quiz.getqName());
+			resultSet = statement.executeQuery();
+			if(resultSet.next()){
+				quiz_id = resultSet.getInt(1);
+			}
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
 			lgr.log(Level.SEVERE, e.getMessage(), e);
@@ -125,6 +132,9 @@ public class DBconnect {
 				Logger lgr = Logger.getLogger(Version.class.getName());
 				lgr.log(Level.WARNING, e.getMessage(), e);
 			}
+		}
+		for(Question question: quiz.getQuestions()){
+			this.createQuestion(question, quiz_id);
 		}
 	}
 
@@ -286,8 +296,8 @@ public class DBconnect {
 		}
 	}
 	
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 		DBconnect db = new DBconnect();
 		//db.createQuestion("What day is it today" , 4);
-	}
+	}*/
 }
