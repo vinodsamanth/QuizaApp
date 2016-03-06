@@ -1,4 +1,6 @@
 package quizaApp.Controller;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -6,28 +8,29 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-//import javafx.application.Application;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Scene;
-//import javafx.scene.layout.StackPane;
-//import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-//import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import quizaApp.Main;
-
+import quizaApp.Model.Login;
+import quizaApp.Model.Student;
+import quizaApp.Model.User;
 
 public abstract class loginController implements Initializable {
-	private TextField username;
-	private PasswordField password;
-    private Button Login;
-    private Label errorMessage;
+	@FXML
+	private TextField userName;
+	@FXML
+	private PasswordField passWord;
+	@FXML
+	private Button loginButton;
+	@FXML
+	private Label errorMessage;
+    
+    final Login login;
     
 
     public loginController(Login login) {
@@ -37,7 +40,11 @@ public abstract class loginController implements Initializable {
 
 	@FXML protected void processLogin() {
 		
-		Object user = login.validateUser(username.getText(), password.getText());
+		
+		System.out.println("Login");
+		if(userName.getText().equals("") || passWord.getText().equals(""))
+			return;
+		User user = login.validateData(userName.getText(), passWord.getText());
 		
         if(user == null){
             errorMessage.setText("Username/password combination is invalid.");
@@ -55,13 +62,19 @@ public abstract class loginController implements Initializable {
 						return StudentController;
 					}
 				});
-        		AnchorPane rootLayout = (AnchorPane) loader.load();
+        		TitledPane rootLayout = null;
+				try {
+					rootLayout = (TitledPane) loader.load();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         		Scene scene = new Scene(rootLayout);
         		Main.mainStage.setScene(scene);
         		
         	}
         	else{
-        		final ProfController ProfController = new ProfController(user);
+        		/*final ProfController ProfController = new ProfController(user);
         		FXMLLoader loader = new FXMLLoader();
         		loader.setLocation(Main.class.getResource("/quizaApp/view/Prof.fxml"));
         		loader.setControllerFactory(new Callback<Class<?>, Object>() {
@@ -74,14 +87,14 @@ public abstract class loginController implements Initializable {
 				});
         		AnchorPane rootLayout = (AnchorPane) loader.load();
         		Scene scene = new Scene(rootLayout);
-        		Main.mainStage.setScene(scene);
+        		Main.mainStage.setScene(scene);*/
         	}
         	
         }
     }
 	@Override public void initialize(URL url, ResourceBundle rb) {
-        username.setPromptText("username");
-        password.setPromptText("password");
+        userName.setPromptText("username");
+        passWord.setPromptText("password");
 }
 }
 
