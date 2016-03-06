@@ -67,7 +67,8 @@ public class DBconnect {
 			resultSet = statement.executeQuery();
 			resultSet.last();
 			int numRows = resultSet.getRow();
-			resultSet.first();
+			System.out.println(numRows);
+			resultSet.beforeFirst();
 			resultString = new String[numRows];
 			int i = 0;
 			while(resultSet.next()){
@@ -97,6 +98,6 @@ public class DBconnect {
 	
 	public static void main(String []arg){
 		DBconnect db = new DBconnect();
-		db.validateUsers("Surya", "Teja");
+		db.returnListQuiz();
 	}
 }

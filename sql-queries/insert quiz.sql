@@ -5,8 +5,8 @@ INSERT INTO `quizaapp`.`quiz`
 `time_frame`,
 `quiz_description`)
 VALUES
-("OOAD",
+("High Performance Networking",
 1,
 100,
 "2016-04-10 00:00:00",
-"This is your first quiz");
+"This quiz tests your understanding on High Performance Networking Concepts");
