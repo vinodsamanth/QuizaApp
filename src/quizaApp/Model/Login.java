@@ -14,7 +14,7 @@ public class Login extends DBconnect {
     public User validateData(String userName, String passCode)
     {
         User user;
-        if(userName==this.userName && passCode==this.passCode && preference == 0){
+        if(userName==this.userName && passCode==this.passCode && preference == 0) {
             user = new Student(id,userName, preference);
         }
         else {

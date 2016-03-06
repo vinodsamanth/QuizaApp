@@ -11,4 +11,7 @@ public class Student extends User {
         this.setName(name);
         this.setPrivilage(privilage);
     }
+
+
+
 }
