@@ -5,13 +5,29 @@ package quizaApp.Model;
  */
 public class Quiz {
     private int qID;
-    private int qName;
+    private String qDescription;
+    private String qName;
     private int noOfQuestions;
-    private long time;
-    private long timeFrame;
+    private int time;
+    private String timeFrame;
     private Question[] questions;
 
-    // Start of getter setter
+    Quiz(String name,int noquestions,int time,String timeframe){
+        this.qName = name;
+        this.noOfQuestions = noquestions;
+        this.time = time;
+        this.timeFrame = timeframe;
+        questions = new Question[noquestions];
+    }
+
+    public String getqDescription() {
+        return qDescription;
+    }
+
+    public void setqDescription(String qDescription) {
+        this.qDescription = qDescription;
+    }
+
     public int getqID() {
         return qID;
     }
@@ -20,11 +36,11 @@ public class Quiz {
         this.qID = qID;
     }
 
-    public int getqName() {
+    public String getqName() {
         return qName;
     }
 
-    public void setqName(int qName) {
+    public void setqName(String qName) {
         this.qName = qName;
     }
 
@@ -36,26 +52,26 @@ public class Quiz {
         this.noOfQuestions = noOfQuestions;
     }
 
-    public long getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
-    public long getTimeFrame() {
+    public String getTimeFrame() {
         return timeFrame;
     }
 
-    public void setTimeFrame(long timeFrame) {
+    public void setTimeFrame(String timeFrame) {
         this.timeFrame = timeFrame;
     }
 
     public Question[] getQuestions() {
         return questions;
     }
-//     End of getter and setter
+
     public void setQuestions(Question[] questions) {
         this.questions = questions;
     }
