@@ -15,10 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
 import javafx.util.Callback;
 import quizaApp.Main;
 import quizaApp.Model.DBconnect;
+import quizaApp.Model.Quiz;
 import quizaApp.Model.Student;
 //import quizaApp.Model.User;
 
@@ -42,7 +44,19 @@ public class studentController implements Initializable{
 		this.student = student;
 	}
 	@FXML protected void Takequiz(){
-		final showquizController showQuizController = new showquizController(student);
+		DBconnect db = new DBconnect();
+		String quiz_name = null;
+		for(MenuItem item : listQuiz.getItems()) {
+            CheckMenuItem checkMenuItem = (CheckMenuItem) item;
+            if(checkMenuItem.isSelected()) {
+                quiz_name = checkMenuItem.getText();
+                System.out.println(checkMenuItem.getText());
+            }
+        }
+		if(quiz_name == null)
+			return;
+		Quiz quiz = db.returnQuiz(quiz_name);
+		final showquizController showQuizController = new showquizController(student , quiz);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/quizaApp/view/Studentshowquiz.fxml"));
 		loader.setControllerFactory(new Callback<Class<?>, Object>() {

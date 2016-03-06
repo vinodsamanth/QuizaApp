@@ -10,14 +10,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.util.Callback;
 import quizaApp.Main;
+import quizaApp.Model.Quiz;
 import quizaApp.Model.Student;
 
 public class showquizController {
 	final Student student;
+	final Quiz quiz;
 	
-	public showquizController(Student student) {
+	public showquizController(Student student, Quiz quiz) {
 		// TODO Auto-generated constructor stub
 		this.student = student;
+		this.quiz = quiz;
 	}
 	@FXML
 	public Label quizInfo;
@@ -25,7 +28,8 @@ public class showquizController {
 	public Button start;
 	
 	public void startQuiz(){
-		final startquizController startQuizController = new startquizController(student);
+		System.out.println("Start Quiz");
+		final startquizController startQuizController = new startquizController(student, quiz);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/quizaApp/view/StudentStartQuiz.fxml"));
 		loader.setControllerFactory(new Callback<Class<?>, Object>() {

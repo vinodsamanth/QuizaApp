@@ -59,6 +59,50 @@ public class DBconnect {
 		return -1;
 	}
 
+	public Quiz returnQuiz(String quiz_name){
+		Quiz quiz = null;
+		int quiz_id = -1;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			this.connection = DriverManager.getConnection(url, user, password);
+			this.statement = connection.prepareStatement("select * from quiz where `quiz_name` = ?");
+			statement.setObject(1, quiz_name);
+			resultSet = statement.executeQuery();
+			resultSet.last();
+			int numRows = resultSet.getRow();
+			System.out.println(numRows);
+			resultSet.beforeFirst();
+			if(resultSet.next()){
+				quiz_id = resultSet.getInt(1);
+				quiz_name = resultSet.getString(2);
+				int no_of_question = resultSet.getInt(3);
+				int time = resultSet.getInt(4);
+				String time_frame = resultSet.getString(5);
+				String quiz_description = resultSet.getString(6);
+				boolean is_taken = resultSet.getBoolean(7);
+				quiz = new Quiz(quiz_id, quiz_name, no_of_question, time, time_frame, quiz_description, is_taken);
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger lgr = Logger.getLogger(Version.class.getName());
+			lgr.log(Level.SEVERE, e.getMessage(), e);
+		} finally {
+			try {
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				Logger lgr = Logger.getLogger(Version.class.getName());
+				lgr.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+		quiz.setQuestions(this.returnQuestionList(quiz_id));
+		return quiz;
+	}
+	
 	public String[] returnListQuiz() {
 		String[] resultString = null;
 		try {
@@ -140,6 +184,7 @@ public class DBconnect {
 
 	public Question[] returnQuestionList(int quiz_id) {
 		Question[] questionList = null;
+		int questionID = -1;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = DriverManager.getConnection(url, user, password);
@@ -154,7 +199,7 @@ public class DBconnect {
 			questionList = new Question[numRows];
 			int i = 0;
 			while (resultSet.next()) {
-				int questionID = resultSet.getInt(1);
+				questionID = resultSet.getInt(1);
 				String question = resultSet.getString(2);
 				questionList[i] = new Question(questionID, question);
 				i++;
@@ -176,10 +221,9 @@ public class DBconnect {
 				lgr.log(Level.WARNING, e.getMessage(), e);
 			}
 		}
-		/*
-		 * for(Question question : questionList)
-		 * System.out.println(question.getQuestion());
-		 */
+		for(Question question : questionList){
+			question.setOptions(this.returnOptions(questionID));
+		}
 		return questionList;
 	}
 
