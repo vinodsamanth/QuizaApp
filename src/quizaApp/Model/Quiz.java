@@ -11,6 +11,7 @@ public class Quiz {
     private int time;
     private String timeFrame;
     private Question[] questions;
+    private int qcount = 0;
 
     Quiz(String name,int noquestions,int time,String timeframe){
         this.qName = name;
