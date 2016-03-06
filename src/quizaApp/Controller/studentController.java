@@ -74,7 +74,7 @@ public class studentController implements Initializable{
 //		String[] quizList = {"value1","value2","value3","value4","value5"};
 		DBconnect db = new DBconnect();
 		String[] quizList = db.returnListQuiz();
-		for(int i = 0; i < 1; i++){
+		for(int i = 0; i < quizList.length; i++){
 			list.add(new CheckMenuItem(quizList[i]));
 		}
 		listQuiz.getItems().addAll(list);
