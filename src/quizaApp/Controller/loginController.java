@@ -15,6 +15,7 @@ import javafx.scene.control.TitledPane;
 import javafx.util.Callback;
 import quizaApp.Main;
 import quizaApp.Model.Login;
+import quizaApp.Model.Professor;
 import quizaApp.Model.Student;
 import quizaApp.Model.User;
 
@@ -72,6 +73,7 @@ public abstract class loginController implements Initializable {
         		
         	}
         	else{
+        		if(user instanceof Professor){
         		final ProfController ProfController = new ProfController(user);
         		FXMLLoader loader = new FXMLLoader();
         		loader.setLocation(Main.class.getResource("/quizaApp/view/Prof.fxml"));
@@ -92,6 +94,7 @@ public abstract class loginController implements Initializable {
 				}
         		Scene scene = new Scene(rootLayout);
         		Main.mainStage.setScene(scene);
+        		}
         	}
         	
         }
