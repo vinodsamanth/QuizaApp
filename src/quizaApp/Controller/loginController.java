@@ -74,7 +74,7 @@ public abstract class loginController implements Initializable {
         		
         	}
         	else{
-        		/*final ProfController ProfController = new ProfController(user);
+        		final ProfController ProfController = new ProfController(user);
         		FXMLLoader loader = new FXMLLoader();
         		loader.setLocation(Main.class.getResource("/quizaApp/view/Prof.fxml"));
         		loader.setControllerFactory(new Callback<Class<?>, Object>() {
@@ -85,9 +85,15 @@ public abstract class loginController implements Initializable {
 						return ProfController;
 					}
 				});
-        		AnchorPane rootLayout = (AnchorPane) loader.load();
+        		TitledPane rootLayout= null;
+				try {
+					rootLayout = (TitledPane) loader.load();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         		Scene scene = new Scene(rootLayout);
-        		Main.mainStage.setScene(scene);*/
+        		Main.mainStage.setScene(scene);
         	}
         	
         }
