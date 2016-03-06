@@ -44,13 +44,13 @@ public abstract class loginController implements Initializable {
 		if(userName.getText().equals("") || passWord.getText().equals(""))
 			return;
 		User user = login.validateData(userName.getText(), passWord.getText());
-		
+//		User user = new Professor(10, "Shriram", 1);
         if(user == null){
             errorMessage.setText("Username/password combination is invalid.");
         }
         else{
         	if(user instanceof Student){
-        		final studentController StudentController = new studentController(user);
+        		final studentController StudentController = new studentController((Student)user);
         		FXMLLoader loader = new FXMLLoader();
         		loader.setLocation(Main.class.getResource("/quizaApp/view/Student.fxml"));
         		loader.setControllerFactory(new Callback<Class<?>, Object>() {
@@ -74,7 +74,7 @@ public abstract class loginController implements Initializable {
         	}
         	else{
         		if(user instanceof Professor){
-        		final ProfController ProfController = new ProfController(user);
+        		final ProfController ProfController = new ProfController((Professor)user);
         		FXMLLoader loader = new FXMLLoader();
         		loader.setLocation(Main.class.getResource("/quizaApp/view/Prof.fxml"));
         		loader.setControllerFactory(new Callback<Class<?>, Object>() {

@@ -5,10 +5,11 @@ package quizaApp.Model;
  */
 public class Professor extends User {
 
-    Professor(int id,String name,int privilage)
+    public Professor(int id,String name,int privilage)
     {
         this.setId(id);
         this.setName(name);
         this.setPrivilage(privilage);
     }
+
 }
