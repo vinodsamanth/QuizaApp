@@ -4,10 +4,18 @@ package quizaApp.Model;
  * Created by suryaduggi on 3/5/16.
  */
 public class Option {
+	private int option_id;
     private String optionString;
     private boolean answer;
 
-    public String getOptionString() {
+    public Option(int option_id, String option, boolean is_true) {
+		// TODO Auto-generated constructor stub
+    	this.option_id = option_id;
+    	this.optionString = option;
+    	this.answer = is_true;
+	}
+
+	public String getOptionString() {
         return optionString;
     }
 

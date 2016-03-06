@@ -95,9 +95,123 @@ public class DBconnect {
 		return resultString;
 	}
 	
+	public void creatQuiz(String quiz_name, int no_of_questions, int time, String time_frame, String quiz_description){
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			this.connection = DriverManager.getConnection(url, user, password);
+			this.statement = connection.prepareStatement("INSERT INTO `quizaapp`.`quiz`(`quiz_name`,`no_of_questions`,`time`,`time_frame`,`quiz_description`) VALUES ( ? , ? , ? , ? , ?)");
+			statement.setString(1, quiz_name);
+			statement.setInt(2, no_of_questions);
+			statement.setInt(3, time);
+			statement.setString(4, time_frame);
+			statement.setString(5, quiz_description);
+			statement.execute();
+		}catch(SQLException | ClassNotFoundException e){
+			Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, e.getMessage(), e);
+		}finally{
+			try {
+				if(resultSet != null)
+					resultSet.close();
+				if(statement != null)
+					statement.close();
+				if(connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				Logger lgr = Logger.getLogger(Version.class.getName());
+                lgr.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+	}
+	
+	public Question[] returnQuestionList(int quiz_id){
+		Question[] questionList = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			this.connection = DriverManager.getConnection(url, user, password);
+			this.statement = connection.prepareStatement("select * from questions where quiz_id = ?");
+			statement.setObject(1, quiz_id);
+			resultSet = statement.executeQuery();
+			resultSet.last();
+			int numRows = resultSet.getRow();
+			System.out.println(numRows);
+			resultSet.beforeFirst();
+			questionList = new Question[numRows];
+			int i = 0;
+			while(resultSet.next()){
+				int questionID = resultSet.getInt(1);
+				String question = resultSet.getString(2);
+				questionList[i] = new Question(questionID, question);
+				i++;
+			}
+		}catch(SQLException | ClassNotFoundException e){
+			Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, e.getMessage(), e);
+		}finally{
+			try {
+				if(resultSet != null)
+					resultSet.close();
+				if(statement != null)
+					statement.close();
+				if(connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				Logger lgr = Logger.getLogger(Version.class.getName());
+                lgr.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+		/*for(Question question : questionList)
+			System.out.println(question.getQuestion());*/
+		return questionList;
+	}
+	
+	public Option[] returnOptions(int question_id){
+		Option[] optionList = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			this.connection = DriverManager.getConnection(url, user, password);
+			this.statement = connection.prepareStatement("select * from options where question_id = ?");
+			statement.setObject(1, question_id);
+			resultSet = statement.executeQuery();
+			resultSet.last();
+			int numRows = resultSet.getRow();
+			System.out.println(numRows);
+			resultSet.beforeFirst();
+			optionList = new Option[numRows];
+			int i = 0;
+			while(resultSet.next()){
+				int option_id = resultSet.getInt(1);
+				String option = resultSet.getString(2);
+				boolean is_true = resultSet.getBoolean(4);
+				optionList[i] = new Option(option_id, option, is_true);
+				i++;
+			}
+		}catch(SQLException | ClassNotFoundException e){
+			Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, e.getMessage(), e);
+		}finally{
+			try {
+				if(resultSet != null)
+					resultSet.close();
+				if(statement != null)
+					statement.close();
+				if(connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				Logger lgr = Logger.getLogger(Version.class.getName());
+                lgr.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+		/*for(Option question : optionList)
+			System.out.println(question.getOptionString());*/
+		return optionList;
+	}
 	
 	public static void main(String []arg){
 		DBconnect db = new DBconnect();
-		db.returnListQuiz();
+		db.creatQuiz("Network Design and Analysis", 10 , 100 , "2016-04-10 00:00:00", "this is a quiz descroption");
 	}
 }

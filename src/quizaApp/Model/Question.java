@@ -8,7 +8,13 @@ public class Question {
     private String question;
     private Option[] options;
 
-    public String getQuestion() {
+    public Question(int questionID, String question) {
+		// TODO Auto-generated constructor stub
+    	this.qId = questionID;
+    	this.question = question;
+	}
+
+	public String getQuestion() {
         return question;
     }
 
