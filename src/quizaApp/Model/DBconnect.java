@@ -97,18 +97,17 @@ public class DBconnect {
 		return resultString;
 	}
 
-	public void creatQuiz(String quiz_name, int no_of_questions, int time,
-			String time_frame, String quiz_description) {
+	public void creatQuiz(Quiz quiz) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = DriverManager.getConnection(url, user, password);
 			this.statement = connection
 					.prepareStatement("INSERT INTO `quizaapp`.`quiz`(`quiz_name`,`no_of_questions`,`time`,`time_frame`,`quiz_description`) VALUES ( ? , ? , ? , ? , ?)");
-			statement.setString(1, quiz_name);
-			statement.setInt(2, no_of_questions);
-			statement.setInt(3, time);
-			statement.setString(4, time_frame);
-			statement.setString(5, quiz_description);
+			statement.setString(1, quiz.getqName());
+			statement.setInt(2, quiz.getNoOfQuestions());
+			statement.setInt(3, quiz.getTime());
+			statement.setString(4, quiz.getTimeFrame());
+			statement.setString(5, quiz.getqDescription());
 			statement.execute();
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
