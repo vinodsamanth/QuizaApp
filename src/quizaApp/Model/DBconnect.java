@@ -405,9 +405,4 @@ public class DBconnect {
 		}
 		return -1;
 	}
-	
-	/*public static void main(String[] arg) {
-		DBconnect db = new DBconnect();
-		//db.createQuestion("What day is it today" , 4);
-	}*/
 }
