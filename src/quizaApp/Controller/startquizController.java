@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import quizaApp.Model.DBconnect;
 import quizaApp.Model.Option;
 import quizaApp.Model.Question;
 import quizaApp.Model.Quiz;
@@ -124,7 +125,9 @@ public class startquizController implements Initializable {
 				numCorrect++;
 			}
 		}
-		System.out.println(numCorrect);
+		//System.out.println(numCorrect);
+		DBconnect db = new DBconnect();
+		
 	}
 	
 

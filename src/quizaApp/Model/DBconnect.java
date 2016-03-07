@@ -341,6 +341,32 @@ public class DBconnect {
 		}
 	}
 	
+	public void addResult(int result){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			this.connection = DriverManager.getConnection(url, user, password);
+			this.statement = connection.prepareStatement("INSERT INTO `quizaapp`.`options`(`option`,`question_id`,`is_true`) VALUES ( ? , ? , ?)");
+			//statement.setString(1, option.getOptionString());
+			statement.execute();
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger lgr = Logger.getLogger(Version.class.getName());
+			lgr.log(Level.SEVERE, e.getMessage(), e);
+		} finally {
+			try {
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				Logger lgr = Logger.getLogger(Version.class.getName());
+				lgr.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+	}
+	
 	/*public static void main(String[] arg) {
 		DBconnect db = new DBconnect();
 		//db.createQuestion("What day is it today" , 4);
