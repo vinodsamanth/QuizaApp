@@ -74,6 +74,7 @@ public class DBconnect {
 			resultSet.beforeFirst();
 			if(resultSet.next()){
 				quiz_id = resultSet.getInt(1);
+				System.out.println("Quiz id :"+quiz_id);
 				quiz_name = resultSet.getString(2);
 				int no_of_question = resultSet.getInt(3);
 				int time = resultSet.getInt(4);
@@ -341,12 +342,15 @@ public class DBconnect {
 		}
 	}
 	
-	public void addResult(int result){
+	public void addResult(int quiz_id, int student_id, int numCorrect){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println(quiz_id+" : "+student_id+" : "+numCorrect);
 			this.connection = DriverManager.getConnection(url, user, password);
-			this.statement = connection.prepareStatement("INSERT INTO `quizaapp`.`options`(`option`,`question_id`,`is_true`) VALUES ( ? , ? , ?)");
-			//statement.setString(1, option.getOptionString());
+			this.statement = connection.prepareStatement("INSERT INTO `quizaapp`.`results`(`quiz_id`,`student_id`,`result`) VALUES ( ? , ? , ?)");
+			statement.setInt(1, quiz_id);
+			statement.setInt(2, student_id);
+			statement.setInt(3, numCorrect);
 			statement.execute();
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
@@ -365,6 +369,39 @@ public class DBconnect {
 				lgr.log(Level.WARNING, e.getMessage(), e);
 			}
 		}
+	}
+
+	public int getUserID(String userName, String passCode) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			this.connection = DriverManager.getConnection(url, user, password);
+			this.statement = connection
+					.prepareStatement("select `user_id` from `quizaapp`.`users` where `user_name` = ? and `password` = ?");
+			statement.setObject(1, userName);
+			statement.setObject(2, passCode);
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				return resultSet.getInt(1);
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger lgr = Logger.getLogger(Version.class.getName());
+			lgr.log(Level.SEVERE, e.getMessage(), e);
+		} finally {
+			try {
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				Logger lgr = Logger.getLogger(Version.class.getName());
+				lgr.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+		return -1;
 	}
 	
 	/*public static void main(String[] arg) {

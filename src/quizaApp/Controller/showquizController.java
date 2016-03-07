@@ -21,6 +21,7 @@ public class showquizController {
 		// TODO Auto-generated constructor stub
 		this.student = student;
 		this.quiz = quiz;
+		System.out.println("Show Quiz controlled QUizID : "+quiz.getqID());
 	}
 	@FXML
 	public Label quizInfo;

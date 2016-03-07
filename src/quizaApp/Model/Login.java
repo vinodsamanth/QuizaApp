@@ -20,9 +20,11 @@ public class Login extends DBconnect {
 		User user = null;
 		int privilage = db.validateUsers(userName, passCode);
 		if (privilage == 0) {
-			user = new Student(id, userName, privilage);
+			System.out.println(db.getUserID(userName,passCode));
+			user = new Student(db.getUserID(userName,passCode), userName, privilage);
 		} else if (privilage == 1) {
-			user = new Professor(id, userName, privilage);
+			System.out.println(db.getUserID(userName,passCode));
+			user = new Professor(db.getUserID(userName, passCode), userName, privilage);
 		}
 
 		return user;
