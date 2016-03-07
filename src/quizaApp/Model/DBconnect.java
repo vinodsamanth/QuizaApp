@@ -222,6 +222,7 @@ public class DBconnect {
 			}
 		}
 		for(Question question : questionList){
+			System.out.println(question.getQuestion());
 			question.setOptions(this.returnOptions(question.getqId()));
 		}
 		return questionList;
