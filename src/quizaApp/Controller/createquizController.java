@@ -58,7 +58,7 @@ public class createquizController implements Initializable {
 
 	public void sumbitQuiz()
 	{
-		Quiz proceedQuiz = new Quiz(quizName.textProperty().toString(),questionInt,timeInt,descriptionLabel.textProperty().toString());
+		Quiz proceedQuiz = new Quiz(quizName.getText(),questionInt,timeInt,descriptionLabel.getText());
 		final questionsPrepController questionPrep = new questionsPrepController(proceedQuiz);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/quizaApp/view/questionsPrep.fxml"));
