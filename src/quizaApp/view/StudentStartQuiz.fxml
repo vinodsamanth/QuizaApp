@@ -12,7 +12,7 @@
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
             <Button fx:id="next" layoutX="299.0" layoutY="313.0" mnemonicParsing="false" onMouseClicked="#nextQuestion" prefHeight="25.0" prefWidth="47.0" text="Next" />
-            <Button fx:id="finalSubmit" layoutX="499.0" layoutY="313.0" mnemonicParsing="false" text="Submit" />
+            <Button fx:id="finalSubmit" layoutX="499.0" layoutY="313.0" mnemonicParsing="false" onMouseClicked="#submitQuiz" text="Submit" />
             <Label fx:id="qNo" layoutX="38.0" layoutY="43.0" prefHeight="21.0" prefWidth="70.0" text="Q. No.  ">
                <font>
                   <Font size="15.0" />

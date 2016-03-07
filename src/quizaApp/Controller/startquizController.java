@@ -66,21 +66,21 @@ public class startquizController implements Initializable {
 	
 	@FXML
 	public void nextQuestion(){
-		for(int i = 0; i < 5; i ++){
+		for(int i = 0; i < 4; i ++){
 			if(rOne.isSelected()){
-				selected[count] = 1;
+				selected[count] = 0;
 				rOne.setSelected(false);
 			}
 			else if(rTwo.isSelected()){
-				selected[count] = 2;
+				selected[count] = 1;
 				rTwo.setSelected(false);
 			}
 			else if(rThree.isSelected()){
-				selected[count] = 3;
+				selected[count] = 2;
 				rThree.setSelected(false);
 			}
 			else{
-				selected[count] = 4;
+				selected[count] = 3;
 				rFour.setSelected(false);
 			}
 		}
@@ -100,12 +100,31 @@ public class startquizController implements Initializable {
 	
 	@FXML
 	public void submitQuiz(){
+		for(int i = 0; i < 4; i ++){
+			if(rOne.isSelected()){
+				selected[count] = 0;
+				rOne.setSelected(false);
+			}
+			else if(rTwo.isSelected()){
+				selected[count] = 1;
+				rTwo.setSelected(false);
+			}
+			else if(rThree.isSelected()){
+				selected[count] = 2;
+				rThree.setSelected(false);
+			}
+			else{
+				selected[count] = 3;
+				rFour.setSelected(false);
+			}
+		}
 		for(int i = 0; i < quiz.getNoOfQuestions(); i++){
 			options = questions[i].getOptions();
 			if(options[selected[i]].isAnswer()){
 				numCorrect++;
 			}
 		}
+		System.out.println(numCorrect);
 	}
 	
 
