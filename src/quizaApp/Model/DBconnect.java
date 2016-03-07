@@ -222,7 +222,7 @@ public class DBconnect {
 			}
 		}
 		for(Question question : questionList){
-			question.setOptions(this.returnOptions(questionID));
+			question.setOptions(this.returnOptions(question.getqId()));
 		}
 		return questionList;
 	}

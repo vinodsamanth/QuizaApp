@@ -61,7 +61,7 @@ public class startquizController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		options = questions[0].getOptions();
-		questionName.setText(questions[0].getQuestion());
+		questionName.setText(questions[1].getQuestion());
 		optionOne.setText(options[0].getOptionString());
 		optionTwo.setText(options[1].getOptionString());
 		optionThree.setText(options[2].getOptionString());
