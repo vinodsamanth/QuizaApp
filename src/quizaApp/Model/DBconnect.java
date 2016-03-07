@@ -80,6 +80,7 @@ public class DBconnect {
 				int time = resultSet.getInt(4);
 				String time_frame = resultSet.getString(5);
 				String quiz_description = resultSet.getString(6);
+				System.out.println("quiz disc"+quiz_description);
 				boolean is_taken = resultSet.getBoolean(7);
 				quiz = new Quiz(quiz_id, quiz_name, no_of_question, time, time_frame, quiz_description, is_taken);
 			}

@@ -13,12 +13,13 @@ public class Quiz {
     private Question[] questions;
     private int qcount = 0;
 
-    Quiz(int quiz_id, String name, int noquestions, int time, String time_frame, String timeframe, boolean is_taken){
+    public Quiz(int quiz_id, String name, int noquestions, int time, String time_frame, String quiz_description, boolean is_taken){
     	this.qID = quiz_id;
         this.qName = name;
         this.noOfQuestions = noquestions;
         this.time = time;
-        this.timeFrame = timeframe;
+        this.timeFrame = time_frame;
+        this.qDescription = quiz_description;
         questions = new Question[noquestions];
     }
 

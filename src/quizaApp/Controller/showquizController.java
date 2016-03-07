@@ -1,9 +1,12 @@
 package quizaApp.Controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +16,7 @@ import quizaApp.Main;
 import quizaApp.Model.Quiz;
 import quizaApp.Model.Student;
 
-public class showquizController {
+public class showquizController implements Initializable {
 	final Student student;
 	final Quiz quiz;
 	
@@ -51,6 +54,13 @@ public class showquizController {
 		Scene scene = new Scene(rootLayout);
 		Main.mainStage.setScene(scene);
 		
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		System.out.println(quiz.getqDescription());
+		quizInfo.setText(quiz.getqDescription());
 	}
 
 }
