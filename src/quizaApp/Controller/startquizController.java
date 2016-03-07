@@ -3,9 +3,14 @@ package quizaApp.Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,7 +38,9 @@ public class startquizController implements Initializable {
 	BooleanProperty isLast;
 	int[] selected;
 	int numCorrect;
-	
+	int min = 0;
+	int sec = 0;
+	ScheduledExecutorService bgthread;
 	
 	@FXML
 	private Label questionName;
@@ -55,18 +62,21 @@ public class startquizController implements Initializable {
 	private RadioButton rThree;
 	@FXML
 	private RadioButton rFour;
-	
+	@FXML
+	private Label timeLabel;
 	@FXML
 	private Button next;
 	@FXML
 	private Button finalSubmit;
 	
 	public int count;
+	StringProperty timejfx = new SimpleStringProperty("");
 	
 	public startquizController(Student student, Quiz quiz) {
 		// TODO Auto-generated constructor stub
 		this.student = student;
 		this.quiz = quiz;
+		this.min = quiz.getTime();
 		this.questions = quiz.getQuestions();
 		this.selected = new int[quiz.getNoOfQuestions()];
 		for(int i=0; i<selected.length ; i++){
@@ -78,6 +88,35 @@ public class startquizController implements Initializable {
 		for(int select : selected){
 			System.out.println(select);
 		}
+
+		this.bgthread = Executors.newSingleThreadScheduledExecutor();
+
+		this.bgthread.scheduleAtFixedRate(new Runnable() {
+			@Override
+			public void run() {
+
+				if(sec==0)
+				{
+					if(min==0){
+						submitQuiz();
+					}
+					else
+					{
+						sec = 60;
+						min--;
+					}
+
+				}
+				else
+				{
+					sec--;
+				}
+                timejfx.set(min+"m : "+sec+"s");
+				timeLabel.textProperty().bind(timejfx);
+			}
+
+		}, 0, 1, TimeUnit.SECONDS);
+
 	}
 	
 	@FXML
@@ -114,6 +153,7 @@ public class startquizController implements Initializable {
 	
 	@FXML
 	public void submitQuiz(){
+		bgthread.shutdown();
 			if(rOne.isSelected()){
 				selected[count] = 0;
 				rOne.setSelected(false);
