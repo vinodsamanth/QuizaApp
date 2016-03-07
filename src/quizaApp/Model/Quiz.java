@@ -12,9 +12,8 @@ public class Quiz {
     private String timeFrame;
     private Question[] questions;
     private int qcount = 0;
-    private boolean is_taken;
 
-    public Quiz(String name,int noquestions,int time,String timeframe){
+    Quiz(int quiz_id, String name, int noquestions, int time, String time_frame, String timeframe, boolean is_taken){
         this.qName = name;
         this.noOfQuestions = noquestions;
         this.time = time;
@@ -22,19 +21,7 @@ public class Quiz {
         questions = new Question[noquestions];
     }
 
-    public Quiz(int quiz_id, String quiz_name, int no_of_question, int time,
-			String time_frame, String quiz_description, boolean is_taken) {
-		// TODO Auto-generated constructor stub
-    	this.qID = quiz_id;
-    	this.qDescription = quiz_description;
-    	this.qName = quiz_name;
-    	this.noOfQuestions = no_of_question;
-    	this.time = time;
-    	this.timeFrame = time_frame;
-    	this.is_taken = is_taken;
-	}
-
-	public String getqDescription() {
+    public String getqDescription() {
         return qDescription;
     }
 

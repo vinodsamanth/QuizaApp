@@ -2,6 +2,7 @@ package quizaApp.Controller;
 
 import java.io.IOException;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,12 +27,15 @@ public class ProfController {
  private Button ViewResult;
  @FXML
  private Label profUsername;
+
  //private Label ErrorMessage;
  public ProfController(Professor professor) {
 	this.professor=professor;
 	 // TODO Auto-generated constructor stub
 	}
- @FXML protected void Createquiz(){
+
+ @FXML
+ protected void Createquiz(){
 	 final createquizController createquizController = new createquizController(professor);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/quizaApp/view/profCreatequiz.fxml"));
@@ -80,7 +84,7 @@ public class ProfController {
  @FXML protected void Postquiz(){
 	 final postController postController = new postController(professor);
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("/quizaApp/view/Professor's Post.fxml"));
+		loader.setLocation(Main.class.getResource("/quizaApp/view/ProfessorPost.fxml"));
 		loader.setControllerFactory(new Callback<Class<?>, Object>() {
 			
 			@Override
@@ -100,6 +104,12 @@ public class ProfController {
 		Main.mainStage.setScene(scene);
 		
 	}
- }
+
+	public void Viewresult(Event event) {
+
+
+
+	}
+}
 
 
