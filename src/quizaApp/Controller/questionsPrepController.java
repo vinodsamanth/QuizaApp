@@ -84,7 +84,8 @@ public class questionsPrepController implements Initializable {
         optionTwo.clear();
         optionThree.clear();
         optionFour.clear();
-
+        
+        
 
     }
 

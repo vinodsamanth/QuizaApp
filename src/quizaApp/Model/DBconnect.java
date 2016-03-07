@@ -179,9 +179,9 @@ public class DBconnect {
 				lgr.log(Level.WARNING, e.getMessage(), e);
 			}
 		}
-		/*for(Question question: quiz.getQuestions()){
+		for(Question question: quiz.getQuestions()){
 			this.createQuestion(question, quiz_id);
-		}*/
+		}
 	}
 
 	public Question[] returnQuestionList(int quiz_id) {
