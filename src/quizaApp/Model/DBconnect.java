@@ -405,4 +405,55 @@ public class DBconnect {
 		}
 		return -1;
 	}
+
+	public int[] getGraphResult(String selectedOption) {
+		// TODO Auto-generated method stub
+		int[] resultGraph = null;
+		int quiz_id = -1;
+		int numRows= 0;;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			this.connection = DriverManager.getConnection(url, user, password);
+			this.statement = connection
+					.prepareStatement("select `quiz_id` from `quizaapp`.`quiz` where `quiz_name` = ?");
+			statement.setObject(1, selectedOption);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()){
+				quiz_id = resultSet.getInt(1);
+			}
+			this.statement = connection
+					.prepareStatement("select `result` from `quizaapp`.`results` where `quiz_id` = ?");
+			statement.setObject(1, quiz_id);
+			resultSet.last();
+			numRows = resultSet.getRow();
+			if(numRows == 0)
+				return null;
+			resultSet.beforeFirst();
+			resultSet = statement.executeQuery();
+			resultGraph = new int[numRows];
+			int count = 0;
+			while(resultSet.next()){
+				resultGraph[count] = resultSet.getInt(1);
+				System.out.println(resultGraph[count]);
+				count++;
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger lgr = Logger.getLogger(Version.class.getName());
+			lgr.log(Level.SEVERE, e.getMessage(), e);
+		} finally {
+			try {
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				Logger lgr = Logger.getLogger(Version.class.getName());
+				lgr.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+		return resultGraph;
+	}
 }

@@ -31,6 +31,7 @@ public class showquizController implements Initializable {
 	@FXML
 	public Button start;
 	
+	@FXML
 	public void startQuiz(){
 		System.out.println("Start Quiz");
 		final startquizController startQuizController = new startquizController(student, quiz);
