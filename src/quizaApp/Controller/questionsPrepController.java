@@ -55,12 +55,12 @@ public class questionsPrepController implements Initializable {
         Question question;
         if(proceedQuiz.getNoOfQuestions()<qcount)
         {
-            optArray[0] = new Option(optionOne.textProperty().toString(),false);
-            optArray[1] = new Option(optionTwo.textProperty().toString(),false);
-            optArray[2] = new Option(optionThree.textProperty().toString(),false);
-            optArray[3] = new Option(optionFour.textProperty().toString(),false);
+            optArray[0] = new Option(optionOne.getText(),false);
+            optArray[1] = new Option(optionTwo.getText(),false);
+            optArray[2] = new Option(optionThree.getText(),false);
+            optArray[3] = new Option(optionFour.getText(),false);
             optArray[correctans-1].setAnswer(true);
-            question = new Question(questionTextArea.textProperty().toString(),optArray);
+            question = new Question(questionTextArea.getText(),optArray);
             questions[qcount-2]=question;
             System.out.println(qcount);
             proceedQuiz.setQuestions(questions);
@@ -69,12 +69,12 @@ public class questionsPrepController implements Initializable {
         }
         else
         {
-            optArray[0] = new Option(optionOne.textProperty().toString(),false);
-            optArray[1] = new Option(optionTwo.textProperty().toString(),false);
-            optArray[2] = new Option(optionThree.textProperty().toString(),false);
-            optArray[3] = new Option(optionFour.textProperty().toString(),false);
+            optArray[0] = new Option(optionOne.getText(),false);
+            optArray[1] = new Option(optionTwo.getText(),false);
+            optArray[2] = new Option(optionThree.getText(),false);
+            optArray[3] = new Option(optionFour.getText(),false);
             optArray[correctans-1].setAnswer(true);
-            question = new Question(questionTextArea.textProperty().toString(),optArray);
+            question = new Question(questionTextArea.getText(),optArray);
             questions[qcount-2]=question;
 
         }
