@@ -21,6 +21,16 @@ public class Quiz {
         questions = new Question[noquestions];
     }
 
+    public Quiz(String name, int noquestions, int time, String qDescription){
+        this.qName = name;
+        this.noOfQuestions = noquestions;
+        this.time = time;
+        this.qDescription = qDescription;
+        questions = new Question[noquestions];
+    }
+
+
+
     public String getqDescription() {
         return qDescription;
     }

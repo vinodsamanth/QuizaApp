@@ -14,6 +14,12 @@ public class Question {
     	this.question = question;
 	}
 
+    public Question(String question,Option[] options) {
+        // TODO Auto-generated constructor stub
+        this.options = options;
+        this.question = question;
+    }
+
 	public String getQuestion() {
         return question;
     }

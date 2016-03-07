@@ -15,6 +15,12 @@ public class Option {
     	this.answer = is_true;
 	}
 
+    public Option(String option, boolean is_true) {
+        // TODO Auto-generated constructor stub
+        this.optionString = option;
+        this.answer = is_true;
+    }
+
 	public String getOptionString() {
         return optionString;
     }
