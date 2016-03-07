@@ -3,16 +3,23 @@ package quizaApp.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.util.Callback;
+import quizaApp.Main;
 import quizaApp.Model.DBconnect;
 import quizaApp.Model.Option;
+import quizaApp.Model.Professor;
 import quizaApp.Model.Question;
 import quizaApp.Model.Quiz;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,6 +28,7 @@ import java.util.ResourceBundle;
  */
 public class questionsPrepController implements Initializable {
      private final Quiz proceedQuiz;
+     private final Professor professor;
      private int qcount = 1;
      private DBconnect db;
 
@@ -42,8 +50,9 @@ public class questionsPrepController implements Initializable {
     private int correctans;
     private Question[] questions;
 
-    public questionsPrepController(Quiz proceedQuiz) {
+    public questionsPrepController(Quiz proceedQuiz, Professor professor) {
          this.proceedQuiz = proceedQuiz;
+         this.professor = professor;
          questions=new Question[proceedQuiz.getNoOfQuestions()];
          db = new DBconnect();
     }
@@ -66,6 +75,7 @@ public class questionsPrepController implements Initializable {
             proceedQuiz.setQuestions(questions);
             // need to save and process to other menu or window
             db.creatQuiz(proceedQuiz);
+            this.loadProfController();
         }
         else
         {
@@ -89,7 +99,31 @@ public class questionsPrepController implements Initializable {
 
     }
 
-    @Override
+    private void loadProfController() {
+		// TODO Auto-generated method stub
+    	final ProfController ProfController = new ProfController(professor);
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/quizaApp/view/Prof.fxml"));
+		loader.setControllerFactory(new Callback<Class<?>, Object>() {
+			
+			@Override
+			public Object call(Class<?> arg0) {
+				// TODO Auto-generated method stub
+				return ProfController;
+			}
+		});
+		TitledPane rootLayout= null;
+		try {
+			rootLayout = (TitledPane) loader.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene scene = new Scene(rootLayout);
+		Main.mainStage.setScene(scene);
+	}
+
+	@Override
     public void initialize(URL location, ResourceBundle resources) {
 
         correctAnsCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {

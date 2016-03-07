@@ -131,7 +131,7 @@ public class startquizController implements Initializable {
 				numCorrect++;
 			}
 		}
-		//System.out.println(numCorrect);
+		System.out.println("numCorrect :"+numCorrect);
 		DBconnect db = new DBconnect();
 		System.out.println("Quiz ID : " + quiz.getqID());
 		db.addResult(quiz.getqID(), student.getId(), numCorrect);

@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class createquizController implements Initializable {
+	
+	private final Professor professor;
 
 	@FXML
 	public TextField quizName;
@@ -34,6 +36,7 @@ public class createquizController implements Initializable {
 	public int questionInt = 0;
 
 	public createquizController(Professor professor) {
+		this.professor = professor;
 	}
 
 
@@ -59,7 +62,7 @@ public class createquizController implements Initializable {
 	public void sumbitQuiz()
 	{
 		Quiz proceedQuiz = new Quiz(quizName.getText(),questionInt,timeInt,descriptionLabel.getText());
-		final questionsPrepController questionPrep = new questionsPrepController(proceedQuiz);
+		final questionsPrepController questionPrep = new questionsPrepController(proceedQuiz,professor);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/quizaApp/view/questionsPrep.fxml"));
 		loader.setControllerFactory(new Callback<Class<?>, Object>() {
