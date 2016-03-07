@@ -14,6 +14,7 @@ public class Quiz {
     private int qcount = 0;
 
     Quiz(int quiz_id, String name, int noquestions, int time, String time_frame, String timeframe, boolean is_taken){
+    	this.qID = quiz_id;
         this.qName = name;
         this.noOfQuestions = noquestions;
         this.time = time;

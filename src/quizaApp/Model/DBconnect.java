@@ -74,6 +74,7 @@ public class DBconnect {
 			resultSet.beforeFirst();
 			if(resultSet.next()){
 				quiz_id = resultSet.getInt(1);
+				System.out.println("Quiz id :"+quiz_id);
 				quiz_name = resultSet.getString(2);
 				int no_of_question = resultSet.getInt(3);
 				int time = resultSet.getInt(4);
@@ -147,12 +148,12 @@ public class DBconnect {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = DriverManager.getConnection(url, user, password);
 			this.statement = connection
-					.prepareStatement("INSERT INTO `quizaapp`.`quiz`(`quiz_name`,`no_of_questions`,`time`,`time_frame`,`quiz_description`) VALUES ( ? , ? , ? , ? , ?)");
+					.prepareStatement("INSERT INTO `quizaapp`.`quiz`(`quiz_name`,`no_of_questions`,`time`,`quiz_description`) VALUES ( ? , ?  , ? , ?)");
 			statement.setString(1, quiz.getqName());
 			statement.setInt(2, quiz.getNoOfQuestions());
 			statement.setInt(3, quiz.getTime());
-			statement.setString(4, quiz.getTimeFrame());
-			statement.setString(5, quiz.getqDescription());
+//			statement.setString(4, quiz.getTimeFrame());
+			statement.setString(4, quiz.getqDescription());
 			statement.execute();
 			this.statement = connection.prepareStatement("Select quiz_id from `quizaapp`.`quiz` where `quiz_name` = ? ");
 			statement.setString(1, quiz.getqName());
@@ -160,6 +161,7 @@ public class DBconnect {
 			if(resultSet.next()){
 				quiz_id = resultSet.getInt(1);
 			}
+			System.out.println("Quiz ID : "+ quiz_id);
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
 			lgr.log(Level.SEVERE, e.getMessage(), e);
@@ -177,9 +179,9 @@ public class DBconnect {
 				lgr.log(Level.WARNING, e.getMessage(), e);
 			}
 		}
-		for(Question question: quiz.getQuestions()){
+		/*for(Question question: quiz.getQuestions()){
 			this.createQuestion(question, quiz_id);
-		}
+		}*/
 	}
 
 	public Question[] returnQuestionList(int quiz_id) {
@@ -244,7 +246,7 @@ public class DBconnect {
 			if(resultSet.next()){
 				question_id = resultSet.getInt(1);
 			}
-			
+			System.out.println("Question ID "+ question_id);
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
 			lgr.log(Level.SEVERE, e.getMessage(), e);
@@ -320,7 +322,7 @@ public class DBconnect {
 			this.statement = connection.prepareStatement("INSERT INTO `quizaapp`.`options`(`option`,`question_id`,`is_true`) VALUES ( ? , ? , ?)");
 			statement.setString(1, option.getOptionString());
 			statement.setInt(2, question_id);
-			statement.setBoolean(2, option.isAnswer());
+			statement.setBoolean(3, option.isAnswer());
 			statement.execute();
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
@@ -339,6 +341,68 @@ public class DBconnect {
 				lgr.log(Level.WARNING, e.getMessage(), e);
 			}
 		}
+	}
+	
+	public void addResult(int quiz_id, int student_id, int numCorrect){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println(quiz_id+" : "+student_id+" : "+numCorrect);
+			this.connection = DriverManager.getConnection(url, user, password);
+			this.statement = connection.prepareStatement("INSERT INTO `quizaapp`.`results`(`quiz_id`,`student_id`,`result`) VALUES ( ? , ? , ?)");
+			statement.setInt(1, quiz_id);
+			statement.setInt(2, student_id);
+			statement.setInt(3, numCorrect);
+			statement.execute();
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger lgr = Logger.getLogger(Version.class.getName());
+			lgr.log(Level.SEVERE, e.getMessage(), e);
+		} finally {
+			try {
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				Logger lgr = Logger.getLogger(Version.class.getName());
+				lgr.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+	}
+
+	public int getUserID(String userName, String passCode) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			this.connection = DriverManager.getConnection(url, user, password);
+			this.statement = connection
+					.prepareStatement("select `user_id` from `quizaapp`.`users` where `user_name` = ? and `password` = ?");
+			statement.setObject(1, userName);
+			statement.setObject(2, passCode);
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				return resultSet.getInt(1);
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger lgr = Logger.getLogger(Version.class.getName());
+			lgr.log(Level.SEVERE, e.getMessage(), e);
+		} finally {
+			try {
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				Logger lgr = Logger.getLogger(Version.class.getName());
+				lgr.log(Level.WARNING, e.getMessage(), e);
+			}
+		}
+		return -1;
 	}
 	
 	/*public static void main(String[] arg) {
