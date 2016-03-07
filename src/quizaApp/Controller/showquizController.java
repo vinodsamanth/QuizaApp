@@ -50,6 +50,7 @@ public class showquizController {
 		}
 		Scene scene = new Scene(rootLayout);
 		Main.mainStage.setScene(scene);
+		
 	}
 
 }

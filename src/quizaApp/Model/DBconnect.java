@@ -148,12 +148,12 @@ public class DBconnect {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = DriverManager.getConnection(url, user, password);
 			this.statement = connection
-					.prepareStatement("INSERT INTO `quizaapp`.`quiz`(`quiz_name`,`no_of_questions`,`time`,`time_frame`,`quiz_description`) VALUES ( ? , ? , ? , ? , ?)");
+					.prepareStatement("INSERT INTO `quizaapp`.`quiz`(`quiz_name`,`no_of_questions`,`time`,`quiz_description`) VALUES ( ? , ?  , ? , ?)");
 			statement.setString(1, quiz.getqName());
 			statement.setInt(2, quiz.getNoOfQuestions());
 			statement.setInt(3, quiz.getTime());
-			statement.setString(4, quiz.getTimeFrame());
-			statement.setString(5, quiz.getqDescription());
+//			statement.setString(4, quiz.getTimeFrame());
+			statement.setString(4, quiz.getqDescription());
 			statement.execute();
 			this.statement = connection.prepareStatement("Select quiz_id from `quizaapp`.`quiz` where `quiz_name` = ? ");
 			statement.setString(1, quiz.getqName());
@@ -161,6 +161,7 @@ public class DBconnect {
 			if(resultSet.next()){
 				quiz_id = resultSet.getInt(1);
 			}
+			System.out.println("Quiz ID : "+ quiz_id);
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
 			lgr.log(Level.SEVERE, e.getMessage(), e);
@@ -178,9 +179,9 @@ public class DBconnect {
 				lgr.log(Level.WARNING, e.getMessage(), e);
 			}
 		}
-		for(Question question: quiz.getQuestions()){
+		/*for(Question question: quiz.getQuestions()){
 			this.createQuestion(question, quiz_id);
-		}
+		}*/
 	}
 
 	public Question[] returnQuestionList(int quiz_id) {
@@ -245,7 +246,7 @@ public class DBconnect {
 			if(resultSet.next()){
 				question_id = resultSet.getInt(1);
 			}
-			
+			System.out.println("Question ID "+ question_id);
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
 			lgr.log(Level.SEVERE, e.getMessage(), e);
@@ -321,7 +322,7 @@ public class DBconnect {
 			this.statement = connection.prepareStatement("INSERT INTO `quizaapp`.`options`(`option`,`question_id`,`is_true`) VALUES ( ? , ? , ?)");
 			statement.setString(1, option.getOptionString());
 			statement.setInt(2, question_id);
-			statement.setBoolean(2, option.isAnswer());
+			statement.setBoolean(3, option.isAnswer());
 			statement.execute();
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());

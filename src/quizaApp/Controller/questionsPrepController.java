@@ -8,6 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import quizaApp.Model.DBconnect;
 import quizaApp.Model.Option;
 import quizaApp.Model.Question;
 import quizaApp.Model.Quiz;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
 public class questionsPrepController implements Initializable {
      private final Quiz proceedQuiz;
      private int qcount = 1;
+     private DBconnect db;
 
     @FXML
     private Label questionLabel;
@@ -43,7 +45,7 @@ public class questionsPrepController implements Initializable {
     public questionsPrepController(Quiz proceedQuiz) {
          this.proceedQuiz = proceedQuiz;
          questions=new Question[proceedQuiz.getNoOfQuestions()];
-         System.out.println(proceedQuiz.toString());
+         db = new DBconnect();
     }
 
     public void SaveAndContinue()
@@ -63,6 +65,7 @@ public class questionsPrepController implements Initializable {
             System.out.println(qcount);
             proceedQuiz.setQuestions(questions);
             // need to save and process to other menu or window
+            db.creatQuiz(proceedQuiz);
         }
         else
         {
