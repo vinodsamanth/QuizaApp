@@ -33,7 +33,7 @@ public class showquizController implements Initializable {
 	
 	@FXML
 	public void startQuiz(){
-		System.out.println("Start Quiz");
+		//System.out.println("Start Quiz");
 		final startquizController startQuizController = new startquizController(student, quiz);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/quizaApp/view/StudentStartQuiz.fxml"));
@@ -60,7 +60,7 @@ public class showquizController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		System.out.println(quiz.getqDescription());
+		//System.out.println(quiz.getqDescription());
 		quizInfo.setText(quiz.getqDescription());
 	}
 

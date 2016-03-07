@@ -40,7 +40,7 @@ public abstract class loginController implements Initializable {
 	@FXML protected void processLogin() {
 		
 		
-		System.out.println("Login");
+//		System.out.println("Login");
 		if(userName.getText().equals("") || passWord.getText().equals(""))
 			return;
 		User user = login.validateData(userName.getText(), passWord.getText());

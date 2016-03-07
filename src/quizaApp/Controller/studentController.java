@@ -56,7 +56,7 @@ public class studentController implements Initializable{
 		if(quiz_name == null)
 			return;
 		Quiz quiz = db.returnQuiz(quiz_name);
-		System.out.println("StudentController quiz_id: "+quiz.getqID());
+//		System.out.println("StudentController quiz_id: "+quiz.getqID());
 		final showquizController showQuizController = new showquizController(student , quiz);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/quizaApp/view/Studentshowquiz.fxml"));

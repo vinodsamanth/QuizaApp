@@ -70,17 +70,17 @@ public class DBconnect {
 			resultSet = statement.executeQuery();
 			resultSet.last();
 			int numRows = resultSet.getRow();
-			System.out.println(numRows);
+			//System.out.println(numRows);
 			resultSet.beforeFirst();
 			if(resultSet.next()){
 				quiz_id = resultSet.getInt(1);
-				System.out.println("Quiz id :"+quiz_id);
+				//System.out.println("Quiz id :"+quiz_id);
 				quiz_name = resultSet.getString(2);
 				int no_of_question = resultSet.getInt(3);
 				int time = resultSet.getInt(4);
 				String time_frame = resultSet.getString(5);
 				String quiz_description = resultSet.getString(6);
-				System.out.println("quiz disc"+quiz_description);
+				//System.out.println("quiz disc"+quiz_description);
 				boolean is_taken = resultSet.getBoolean(7);
 				quiz = new Quiz(quiz_id, quiz_name, no_of_question, time, time_frame, quiz_description, is_taken);
 			}
@@ -115,7 +115,7 @@ public class DBconnect {
 			resultSet = statement.executeQuery();
 			resultSet.last();
 			int numRows = resultSet.getRow();
-			System.out.println(numRows);
+			//System.out.println(numRows);
 			resultSet.beforeFirst();
 			resultString = new String[numRows];
 			int i = 0;
@@ -162,7 +162,7 @@ public class DBconnect {
 			if(resultSet.next()){
 				quiz_id = resultSet.getInt(1);
 			}
-			System.out.println("Quiz ID : "+ quiz_id);
+			//System.out.println("Quiz ID : "+ quiz_id);
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
 			lgr.log(Level.SEVERE, e.getMessage(), e);
@@ -225,7 +225,7 @@ public class DBconnect {
 			}
 		}
 		for(Question question : questionList){
-			System.out.println(question.getQuestion());
+			//System.out.println(question.getQuestion());
 			question.setOptions(this.returnOptions(question.getqId()));
 		}
 		return questionList;
@@ -247,7 +247,7 @@ public class DBconnect {
 			if(resultSet.next()){
 				question_id = resultSet.getInt(1);
 			}
-			System.out.println("Question ID "+ question_id);
+			//System.out.println("Question ID "+ question_id);
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
 			lgr.log(Level.SEVERE, e.getMessage(), e);
@@ -281,7 +281,7 @@ public class DBconnect {
 			resultSet = statement.executeQuery();
 			resultSet.last();
 			int numRows = resultSet.getRow();
-			System.out.println(numRows);
+			//System.out.println(numRows);
 			resultSet.beforeFirst();
 			optionList = new Option[numRows];
 			int i = 0;
@@ -347,7 +347,7 @@ public class DBconnect {
 	public void addResult(int quiz_id, int student_id, int numCorrect){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println(quiz_id+" : "+student_id+" : "+numCorrect);
+			//System.out.println(quiz_id+" : "+student_id+" : "+numCorrect);
 			this.connection = DriverManager.getConnection(url, user, password);
 			this.statement = connection.prepareStatement("INSERT INTO `quizaapp`.`results`(`quiz_id`,`student_id`,`result`) VALUES ( ? , ? , ?)");
 			statement.setInt(1, quiz_id);
@@ -424,8 +424,10 @@ public class DBconnect {
 			this.statement = connection
 					.prepareStatement("select `result` from `quizaapp`.`results` where `quiz_id` = ?");
 			statement.setObject(1, quiz_id);
+			resultSet = statement.executeQuery();
 			resultSet.last();
 			numRows = resultSet.getRow();
+			System.out.println("NumRows"+numRows);
 			if(numRows == 0)
 				return null;
 			resultSet.beforeFirst();
@@ -433,6 +435,7 @@ public class DBconnect {
 			resultGraph = new int[numRows];
 			int count = 0;
 			while(resultSet.next()){
+				System.out.println("Count"+count);
 				resultGraph[count] = resultSet.getInt(1);
 				System.out.println(resultGraph[count]);
 				count++;

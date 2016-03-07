@@ -73,7 +73,6 @@ public class startquizController implements Initializable {
 	
 	@FXML
 	public void nextQuestion(){
-		for(int i = 0; i < 4; i ++){
 			if(rOne.isSelected()){
 				selected[count] = 0;
 				rOne.setSelected(false);
@@ -90,10 +89,9 @@ public class startquizController implements Initializable {
 				selected[count] = 3;
 				rFour.setSelected(false);
 			}
-		}
-		System.out.println(selected[count]);
+		//System.out.println(selected[count]);
 		count++;
-		System.out.println(count+ " : " + quiz.getNoOfQuestions());
+		//System.out.println(count+ " : " + quiz.getNoOfQuestions());
 		if(count == quiz.getNoOfQuestions()-1){
 			isLast.set(false);
 		}
@@ -107,7 +105,6 @@ public class startquizController implements Initializable {
 	
 	@FXML
 	public void submitQuiz(){
-		for(int i = 0; i < 4; i ++){
 			if(rOne.isSelected()){
 				selected[count] = 0;
 				rOne.setSelected(false);
@@ -124,9 +121,11 @@ public class startquizController implements Initializable {
 				selected[count] = 3;
 				rFour.setSelected(false);
 			}
-		}
+		System.out.println("Printing Result");
 		for(int i = 0; i < quiz.getNoOfQuestions(); i++){
 			options = questions[i].getOptions();
+			
+			System.out.println(selected[i]+":"+options[selected[i]].getOptionString());
 			if(options[selected[i]].isAnswer()){
 				numCorrect++;
 			}
