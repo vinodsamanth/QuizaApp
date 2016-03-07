@@ -49,6 +49,8 @@ public class startquizController implements Initializable {
 	@FXML
 	private Button finalSubmit;
 	
+	public int count;
+	
 	public startquizController(Student student, Quiz quiz) {
 		// TODO Auto-generated constructor stub
 		this.student = student;
@@ -56,11 +58,20 @@ public class startquizController implements Initializable {
 		this.questions = quiz.getQuestions();
 	}
 	
+	public void nextQuestion(){
+		options = questions[0].getOptions();
+		questionName.setText(questions[0].getQuestion());
+		optionOne.setText(options[0].getOptionString());
+		optionTwo.setText(options[1].getOptionString());
+		optionThree.setText(options[2].getOptionString());
+		optionFour.setText(options[3].getOptionString());
+	}
 	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		count = 0;
 		options = questions[0].getOptions();
 		questionName.setText(questions[0].getQuestion());
 		optionOne.setText(options[0].getOptionString());

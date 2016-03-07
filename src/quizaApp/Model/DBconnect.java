@@ -37,7 +37,7 @@ public class DBconnect {
 			statement.setObject(2, passWord);
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
-				System.out.println(resultSet.getString(1));
+				return resultSet.getInt(1);
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			Logger lgr = Logger.getLogger(Version.class.getName());
