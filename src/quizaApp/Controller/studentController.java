@@ -82,7 +82,7 @@ public class studentController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		studentUsername.setText(student.getName());
+		studentUsername.setText("Welcome "+student.getName());
 		
 		
 		//Query database and add String quizList[]

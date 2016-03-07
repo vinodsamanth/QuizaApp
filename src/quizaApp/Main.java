@@ -37,7 +37,7 @@ public class Main extends Application {
 			});
 			TitledPane root = (TitledPane) loader.load();
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("Login Page");
+			primaryStage.setTitle("QuizaApp");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

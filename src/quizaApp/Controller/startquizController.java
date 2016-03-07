@@ -69,8 +69,15 @@ public class startquizController implements Initializable {
 		this.quiz = quiz;
 		this.questions = quiz.getQuestions();
 		this.selected = new int[quiz.getNoOfQuestions()];
+		for(int i=0; i<selected.length ; i++){
+			selected[i] = -1;
+		}
 		this.isLast = new SimpleBooleanProperty(true);
 		this.numCorrect = 0;
+		System.out.println("Printing Selected");
+		for(int select : selected){
+			System.out.println(select);
+		}
 	}
 	
 	@FXML
@@ -87,7 +94,7 @@ public class startquizController implements Initializable {
 				selected[count] = 2;
 				rThree.setSelected(false);
 			}
-			else{
+			else if(rFour.isSelected()){
 				selected[count] = 3;
 				rFour.setSelected(false);
 			}
@@ -119,7 +126,7 @@ public class startquizController implements Initializable {
 				selected[count] = 2;
 				rThree.setSelected(false);
 			}
-			else{
+			else if(rFour.isSelected()){
 				selected[count] = 3;
 				rFour.setSelected(false);
 			}
@@ -127,8 +134,8 @@ public class startquizController implements Initializable {
 		for(int i = 0; i < quiz.getNoOfQuestions(); i++){
 			options = questions[i].getOptions();
 			
-			System.out.println(selected[i]+":"+options[selected[i]].getOptionString());
-			if(options[selected[i]].isAnswer()){
+			//System.out.println(selected[i]+":"+options[selected[i]].getOptionString());
+			if(selected[i] != -1 && options[selected[i]].isAnswer()){
 				numCorrect++;
 			}
 		}

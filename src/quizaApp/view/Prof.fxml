@@ -13,17 +13,17 @@
    <content>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="createQuiz" layoutX="59.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#Createquiz" text="Create Quiz">
+            <Button fx:id="createQuiz" alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#Createquiz" style="-fx-background-color: green;" text="Create Quiz" textAlignment="CENTER" textFill="#f8f8f6">
                <font>
                   <Font size="26.0" />
                </font>
             </Button>
-            <Button fx:id="viewResult" layoutX="236.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#ViewResult" text="View Result">
+            <Button fx:id="viewResult" layoutX="207.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#ViewResult" style="-fx-background-color: slateblue;" text="View Results" textFill="#f8f5f5">
                <font>
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button fx:id="postQuiz" layoutX="414.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#Postquiz" text="Post Quiz">
+            <Button fx:id="postQuiz" layoutX="207.0" layoutY="158.0" mnemonicParsing="false" onMouseClicked="#Postquiz" prefHeight="49.0" prefWidth="184.0" style="-fx-background-color: lightcoral;" text="Post Quiz" textFill="#f2eeee">
                <font>
                   <Font size="26.0" />
                </font>
