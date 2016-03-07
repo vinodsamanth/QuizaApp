@@ -38,9 +38,29 @@ public class GraphResultShowController implements Initializable{
 		int[] resultGraph = db.getGraphResult(selectedOption);
 		if(resultGraph == null)
 			return;
+		
+		int belowThree = 0;
+		int betweenThreeFive = 0;
+		int betweenFiveSeven = 0;
+		int aboveSeven = 0;
+		
+		for(int i : resultGraph){
+			if( i <= 3)
+				belowThree++;
+			if(i > 3 & i <= 5)
+				betweenThreeFive++;
+			if(i > 5 & i <= 7)
+				betweenFiveSeven++;
+			if( i > 7)
+				aboveSeven++;
+		}
+		
 		ObservableList<PieChart.Data> pieChartData = 
                 FXCollections.observableArrayList(
-                    new PieChart.Data("January", 100));
+                    new PieChart.Data("Below 3", belowThree),
+                    new PieChart.Data("Between 3 and 5", betweenThreeFive),
+                    new PieChart.Data("Between 5 and 7", betweenFiveSeven),
+                    new PieChart.Data("Above 7", aboveSeven));
 		
 		pieChart.setData(pieChartData);
 	}
