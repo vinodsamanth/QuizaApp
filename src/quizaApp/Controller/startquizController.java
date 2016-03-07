@@ -187,7 +187,7 @@ public class startquizController implements Initializable {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Score Window");
 		alert.setHeaderText(null);
-		alert.setContentText("You scored "+numCorrect+"/10");
+		alert.setContentText("You scored "+numCorrect+"/"+quiz.getNoOfQuestions());
 
 		alert.showAndWait();
 		
