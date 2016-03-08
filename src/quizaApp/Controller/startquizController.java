@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -76,7 +77,7 @@ public class startquizController implements Initializable {
 		// TODO Auto-generated constructor stub
 		this.student = student;
 		this.quiz = quiz;
-		this.min = quiz.getTime();
+		this.min = 1;//quiz.getTime();
 		this.questions = quiz.getQuestions();
 		this.selected = new int[quiz.getNoOfQuestions()];
 		for(int i=0; i<selected.length ; i++){
@@ -98,7 +99,16 @@ public class startquizController implements Initializable {
 				if(sec==0)
 				{
 					if(min==0){
-						submitQuiz();
+						
+						Platform.runLater(new Runnable() {
+							
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								submitQuiz();
+							}
+						});
+						bgthread.shutdown();
 					}
 					else
 					{
@@ -111,8 +121,15 @@ public class startquizController implements Initializable {
 				{
 					sec--;
 				}
-                timejfx.set(min+"m : "+sec+"s");
-				timeLabel.textProperty().bind(timejfx);
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						timejfx.set("Time: "+min+":"+sec);
+					}
+				});
+				
 			}
 
 		}, 0, 1, TimeUnit.SECONDS);
@@ -153,7 +170,7 @@ public class startquizController implements Initializable {
 	
 	@FXML
 	public void submitQuiz(){
-		bgthread.shutdown();
+			System.out.println("submit quiz");
 			if(rOne.isSelected()){
 				selected[count] = 0;
 				rOne.setSelected(false);
@@ -183,6 +200,8 @@ public class startquizController implements Initializable {
 		DBconnect db = new DBconnect();
 		System.out.println("Quiz ID : " + quiz.getqID());
 		db.addResult(quiz.getqID(), student.getId(), numCorrect);
+		System.out.println("After db update");
+		
 		
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Score Window");
@@ -190,7 +209,6 @@ public class startquizController implements Initializable {
 		alert.setContentText("You scored "+numCorrect+"/"+quiz.getNoOfQuestions());
 
 		alert.showAndWait();
-		
 		this.loadStudentController();
 	}
 	
@@ -230,6 +248,7 @@ public class startquizController implements Initializable {
 		optionTwo.setText(options[1].getOptionString());
 		optionThree.setText(options[2].getOptionString());
 		optionFour.setText(options[3].getOptionString());
+		timeLabel.textProperty().bind(timejfx);
 	}
 	
 
