@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Professor View Result" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quizaApp.Controller.ShowResultController">
+   <font>
+      <Font size="15.0" />
+   </font>
+   <content>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ComboBox fx:id="resultSelection" layoutX="210.0" layoutY="41.0" prefWidth="150.0" />
+            <Button fx:id="showResult" layoutX="167.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#showResult" prefHeight="26.0" prefWidth="237.0" text="View Result" />
+         </children>
+      </Pane>
+   </content>
+</TitledPane>

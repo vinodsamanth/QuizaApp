@@ -77,7 +77,7 @@ public class startquizController implements Initializable {
 		// TODO Auto-generated constructor stub
 		this.student = student;
 		this.quiz = quiz;
-		this.min = 1;//quiz.getTime();
+		this.min = quiz.getTime();
 		this.questions = quiz.getQuestions();
 		this.selected = new int[quiz.getNoOfQuestions()];
 		for(int i=0; i<selected.length ; i++){
