@@ -1,4 +1,4 @@
-package quizaApp.Controller;
+package quizaApp.UserInterface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,8 +21,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import quizaApp.Main;
-import quizaApp.Model.DBconnect;
-import quizaApp.Model.Professor;
+import quizaApp.Model.DBConnectModule.DBconnect;
+import quizaApp.Model.quizKit.Professor;
 
 public class ShowResultController implements Initializable {
 

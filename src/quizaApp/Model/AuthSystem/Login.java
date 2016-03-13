@@ -1,4 +1,9 @@
-package quizaApp.Model;
+package quizaApp.Model.AuthSystem;
+
+import quizaApp.Model.DBConnectModule.DBconnect;
+import quizaApp.Model.quizKit.Professor;
+import quizaApp.Model.quizKit.Student;
+import quizaApp.Model.quizKit.User;
 
 /**
  * Created by suryaduggi on 3/5/16.
@@ -11,7 +16,7 @@ public class Login extends DBconnect {
 	private int privilage = 0;
 	private DBconnect db;
 
-	Login() {
+	public Login() {
 		db = new DBconnect();
 
 	}

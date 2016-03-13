@@ -1,4 +1,4 @@
-package quizaApp.Controller;
+package quizaApp.UserInterface;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -7,13 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import quizaApp.Main;
-import quizaApp.Model.Professor;
-import quizaApp.Model.Quiz;
+import quizaApp.Model.quizKit.Professor;
+import quizaApp.Model.quizKit.Quiz;
 
 import java.io.IOException;
 import java.net.URL;

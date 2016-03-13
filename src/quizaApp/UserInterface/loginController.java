@@ -1,8 +1,9 @@
-package quizaApp.Controller;
+package quizaApp.UserInterface;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,10 +15,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.util.Callback;
 import quizaApp.Main;
-import quizaApp.Model.Login;
-import quizaApp.Model.Professor;
-import quizaApp.Model.Student;
-import quizaApp.Model.User;
+import quizaApp.Model.AuthSystem.Login;
+import quizaApp.Model.quizKit.Professor;
+import quizaApp.Model.quizKit.Student;
+import quizaApp.Model.quizKit.User;
 
 public abstract class loginController implements Initializable {
 	@FXML

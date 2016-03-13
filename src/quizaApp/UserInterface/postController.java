@@ -1,4 +1,4 @@
-package quizaApp.Controller;
+package quizaApp.UserInterface;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuButton;
-import quizaApp.Model.Professor;
+import quizaApp.Model.quizKit.Professor;
 
 public class postController implements Initializable {
 	private ObservableList<CheckMenuItem> selectlist = FXCollections.observableArrayList();

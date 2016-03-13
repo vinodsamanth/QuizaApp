@@ -1,4 +1,4 @@
-package quizaApp.Model;
+package quizaApp.Model.DBConnectModule;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import quizaApp.Model.quizKit.Option;
+import quizaApp.Model.quizKit.Question;
+import quizaApp.Model.quizKit.Quiz;
 
 import com.sun.corba.se.impl.util.Version;
 

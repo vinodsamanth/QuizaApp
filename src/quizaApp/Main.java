@@ -1,8 +1,8 @@
 package quizaApp;
 	
 //import application.Main;
-import quizaApp.Controller.loginController;
 import quizaApp.Model.QuizaApp;
+import quizaApp.UserInterface.loginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

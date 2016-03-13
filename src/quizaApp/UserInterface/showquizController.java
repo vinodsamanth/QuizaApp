@@ -1,4 +1,4 @@
-package quizaApp.Controller;
+package quizaApp.UserInterface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,8 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.util.Callback;
 import quizaApp.Main;
-import quizaApp.Model.Quiz;
-import quizaApp.Model.Student;
+import quizaApp.Model.quizKit.Quiz;
+import quizaApp.Model.quizKit.Student;
 
 public class showquizController implements Initializable {
 	final Student student;

@@ -1,4 +1,4 @@
-package quizaApp.Controller;
+package quizaApp.UserInterface;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.util.Callback;
 import quizaApp.Main;
-import quizaApp.Model.Professor;
+import quizaApp.Model.quizKit.Professor;
 
 //import javafx.fxml.Initializable;
 /*import javafx.scene.control.Button;
